@@ -110,18 +110,18 @@ def main():
     """Main function to run the BB84 QKD simulation"""
     
     # Fixed simulation parameters
-    num_runs = 5
-    sequence_length = 100000
-    mu = 0.65
-    nu_1 = 0.08
+    num_runs = 10000
+    sequence_length = 25000
+    mu = 4.234503
+    nu_1 = 1.678951
     nu_2 = 0.0
     decoy_ratio = 0.25
-    alpha = 0.2
+    alpha = 0.0
     l = 20.0
-    channel_loss = 5.6
-    receiver_loss = 3.5
-    detector_efficiency = 0.10
-    dark_count_rate = 1e-5
+    channel_loss = 0
+    receiver_loss = 1.038
+    detector_efficiency = 0.47 * 2
+    dark_count_rate = 0.032765
     detector_error = 0.014
     
     # Eavesdropper settings - Choose one: "No-Eve", "PNS", or "BS"

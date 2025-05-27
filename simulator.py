@@ -123,14 +123,6 @@ class BB84Simulator:
         detected_decoy_1_src_seq = decoy_1_src_seq[detected_decoy_1_index]
         detected_decoy_2_src_seq = decoy_2_src_seq[detected_decoy_2_index]
 
-        # Calculate gains
-        print("")
-        print("Signal total", len(signal_seq))
-        print("Decoy 1 total", len(decoy_1_seq))
-        print("Total señal detectados: ", np.sum(detected_signal_index))
-        print("Total señal enviados: ", len(signal_seq))
-        print("Total decoy 1 detectados: ", np.sum(detected_decoy_1_index))
-        print("Total decoy 1 enviados: ", len(decoy_1_seq))
         Q_mu = np.sum(detected_signal_index) / len(signal_seq) if len(signal_seq) > 0 else 0
         Q_nu_1 = np.sum(detected_decoy_1_index) / len(decoy_1_seq) if len(decoy_1_seq) > 0 else 0
         Q_nu_2 = np.sum(detected_decoy_2_index) / len(decoy_2_seq) if len(decoy_2_seq) > 0 else 0
