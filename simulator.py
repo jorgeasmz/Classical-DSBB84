@@ -64,7 +64,7 @@ class BB84Simulator:
         t_B = 10**((-receiver_loss)/10) # Optical elements transmittance
         eta_D = detector_efficiency # Detector efficiency
         eta_Bob = t_B * eta_D # Bob's side transmittance
-        eta = t_AB * eta_Bob * (1 - decoy_ratio) # Overall transmittance
+        eta = t_AB * eta_Bob # * (1 - decoy_ratio) # Overall transmittance
         fraction = 0.9 # Fraction of transmitted pulse energy due to a BS attack
 
         # Initialize the source

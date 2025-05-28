@@ -31,7 +31,8 @@ def yield_i(n: int, eta_state: float, dark_count_rate: float) -> float:
     Returns:
         float: The calculated yield of n-photon states.
     """
-    return dark_count_rate + (1 - (1 - eta_state)**n)
+    eta_n = (1 - (1 - eta_state)**n)
+    return dark_count_rate + eta_n - (dark_count_rate * eta_n)
 
 def generate_filename(num_runs, sequence_length, attack_type):
     """
@@ -110,7 +111,7 @@ def main():
     """Main function to run the BB84 QKD simulation"""
     
     # Fixed simulation parameters
-    num_runs = 10000
+    num_runs = 2000
     sequence_length = 25000
     mu = 4.234503
     nu_1 = 1.678951
