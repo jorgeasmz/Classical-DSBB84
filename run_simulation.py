@@ -113,10 +113,10 @@ def main():
     """Main function to run the BB84 QKD simulation"""
     
     # Fixed simulation parameters
-    num_runs = 5
+    num_runs = 5000
     sequence_length = 25000
-    mu = 4.234503
-    nu_1 = 1.678951
+    mu = 5.722507
+    nu_1 = 2.268934
     nu_2 = 0.0
     decoy_ratio = 0.25
     alpha = 0.0
