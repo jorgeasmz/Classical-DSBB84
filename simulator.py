@@ -134,14 +134,14 @@ class BB84Simulator:
             E_mu = 0
             
         if len(detected_decoy_1_src_seq) > 0:
-            E_nu1 = np.sum(detected_decoy_1_seq != detected_decoy_1_src_seq) / len(detected_decoy_1_src_seq)
+            E_nu_1 = np.sum(detected_decoy_1_seq != detected_decoy_1_src_seq) / len(detected_decoy_1_src_seq)
         else:
-            E_nu1 = 0
+            E_nu_1 = 0
             
         if len(detected_decoy_2_src_seq) > 0:
-            E_nu2 = np.sum(detected_decoy_2_seq != detected_decoy_2_src_seq) / len(detected_decoy_2_src_seq)
+            E_nu_2 = np.sum(detected_decoy_2_seq != detected_decoy_2_src_seq) / len(detected_decoy_2_src_seq)
         else:
-            E_nu2 = 0
+            E_nu_2 = 0
 
         simulation_results = {
             'sequence_length': sequence_length,
@@ -162,8 +162,8 @@ class BB84Simulator:
             'Q_nu_1': Q_nu_1,
             'Q_nu_2': Q_nu_2,
             'E_mu': E_mu,
-            'E_nu1': E_nu1,
-            'E_nu2': E_nu2
+            'E_nu_1': E_nu_1,
+            'E_nu_2': E_nu_2
         }
 
         return simulation_results

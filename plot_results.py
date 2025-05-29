@@ -67,10 +67,14 @@ def generate_yields_plot(filename, output_filename=None, selected_n=None):
     with open(filepath, 'r') as f:
         data = json.load(f)
     
+    Q_mu = data['signal_gains']
+    Q_nu_1 = data['decoy_gains']
+    E_mu = data['signal_QBERs']
+    E_nu_1 = data['decoy_QBERs'] 
     n_values = data['n_values']
     y_expected = data['y_expected']
     y_signal = data['y_signal']
-    y_decoy = data['y_decoy']    
+    y_decoy = data['y_decoy']
     
     # Filter data by selected n values if provided
     if selected_n is not None:
@@ -179,6 +183,13 @@ def generate_yields_plot(filename, output_filename=None, selected_n=None):
     plt.show()
     
     print(f"Plot saved as '{output_path}'")
+
+    # Print the average gains and QBERs
+    print("\nAverage Gains and QBERs:")
+    print(f"Signal Gain (Q_mu): {np.mean(Q_mu):.6f}")
+    print(f"Decoy Gain (Q_nu_1): {np.mean(Q_nu_1):.6f}")
+    print(f"Signal QBER (E_mu): {np.mean(E_mu):.6f}")
+    print(f"Decoy QBER (E_nu_1): {np.mean(E_nu_1):.6f}")
     
     # Print the average yields for each n
     print("\nAverage Yields for each n:")

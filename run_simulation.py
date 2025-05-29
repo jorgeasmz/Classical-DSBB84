@@ -52,7 +52,7 @@ def save_yields_to_file(y_expected, y_signal, y_decoy, n_values,
                         num_runs, sequence_length, mu, nu_1, nu_2, decoy_ratio,
                         alpha, l, channel_loss, receiver_loss, detector_efficiency,
                         dark_count_rate, detector_error, attack_type, 
-                        eta, signal_gain, decoy_gain):
+                        eta, signal_gains, decoy_gains, signal_QBERs, decoy_QBERs):
     """
     Save yield data to a JSON file with specified format.
     
@@ -88,10 +88,12 @@ def save_yields_to_file(y_expected, y_signal, y_decoy, n_values,
             'dark_count_rate': dark_count_rate,
             'detector_error': detector_error,
             'attack_type': attack_type,
-            'eta': eta,
-            'signal_gain': signal_gain,
-            'decoy_gain': decoy_gain
+            'eta': eta
         },
+        'signal_gains': signal_gains,
+        'decoy_gains': decoy_gains,
+        'signal_QBERs': signal_QBERs,
+        'decoy_QBERs': decoy_QBERs,
         'n_values': n_values,
         'y_expected': [list(map(float, yields)) for yields in y_expected],
         'y_signal': [list(map(float, yields)) for yields in y_signal],
@@ -111,7 +113,7 @@ def main():
     """Main function to run the BB84 QKD simulation"""
     
     # Fixed simulation parameters
-    num_runs = 2000
+    num_runs = 5
     sequence_length = 25000
     mu = 4.234503
     nu_1 = 1.678951
@@ -131,6 +133,12 @@ def main():
 
     # Values of n for the yield calculation
     n_values = list(range(1, 6))
+
+    # Initialize lists for QBERs and gains
+    Q_mus = []
+    Q_nu_1s = []
+    E_mus = []
+    E_nu_1s = []
 
     # Yield lists for expected, signal, and decoy states
     y_expected = [[] for _ in n_values]
@@ -168,6 +176,12 @@ def main():
         # Calculate the state efficiency for signal and decoy states
         eta_signal = eta_state(results['mu'], results['Q_mu'], dark_count_rate)
         eta_decoy = eta_state(results['nu_1'], results['Q_nu_1'], dark_count_rate)
+
+        # Store QBERs and gains
+        Q_mus.append(results['Q_mu'])
+        Q_nu_1s.append(results['Q_nu_1'])
+        E_mus.append(results['E_mu'])
+        E_nu_1s.append(results['E_nu_1'])
         
         # Calculate yields for each n value
         for i, n in enumerate(n_values):
@@ -181,7 +195,7 @@ def main():
         num_runs, sequence_length, mu, nu_1, nu_2, decoy_ratio,
         alpha, l, channel_loss, receiver_loss, 
         detector_efficiency, dark_count_rate, detector_error,
-        attack_type, eta, results['Q_mu'], results['Q_nu_1']
+        attack_type, eta, Q_mus, Q_nu_1s, E_mus, E_nu_1s
     )
     
     print(f"Simulation completed. Run 'python plot_results.py --file {os.path.basename(filepath)}' to generate the plot.")
